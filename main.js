@@ -37,18 +37,7 @@ const list = [
     }
 ];
 
-let elementImg = document.getElementsByClassName('tarjeta__img')[0];
-let elementCancion = document.getElementsByClassName('tarjeta__cancion')[0];
-let elementCantante = document.getElementsByClassName('tarjeta__cantante')[0];
-let elementStartTime = document.getElementsByClassName('tarjeta__start-time')[0];
-let elementEndTime = document.getElementsByClassName('tarjeta__end-time')[0];
-let elementBarra = document.getElementsByClassName('tarjeta__barra')[0];
-let elementProgresoBarra = document.getElementsByClassName('tarjeta__barra-progreso')[0];
-let elementShuffle = document.getElementsByClassName('tarjeta__shuffle')[0];
-let elementRepeat = document.getElementsByClassName('tarjeta__repeat')[0];
-let elementBackward = document.getElementsByClassName('tarjeta__back')[0];
-let elementReproduccion = document.getElementsByClassName('tarjeta__reproduccion')[0];
-let elementNext = document.getElementsByClassName('tarjeta__next')[0];
+let element = document.querySelectorAll('.tarjeta');
 
 let orden = 0;
 
@@ -66,7 +55,7 @@ let progress = () => {
 let pintarCancion = (id) => {
     elementCancion.textContent = list[id].title;
     elementCantante.textContent = list[id].author;
-    elementImg.src = './assets/'+ list[id].cover;
+    element.src = './assets/'+ list[id].cover;
     elementEndTime.textContent = getMinutes(list[id].duration);
 
 }
@@ -86,7 +75,7 @@ let reproductorControles = (arg) => {
             pintarCancion(orden);
             break;
         case 'next':
-            orden = (orden === list.length -1 )? 0: orden + 1;
+            orden = (orden === list.length -1 ) ? 0: orden + 1;
             pintarCancion(orden);
             break;
 
@@ -107,4 +96,5 @@ elementShuffle.addEventListener("click", () => reproductorControles('shuffle'));
 elementRepeat.addEventListener("click", () => reproductorControles('repeat'));
 
 pintarCancion(0);
+progress();
 
